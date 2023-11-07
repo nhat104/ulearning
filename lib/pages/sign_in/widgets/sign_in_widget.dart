@@ -2,27 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:u_learning/common/values/colors.dart';
 
-AppBar buildAppBar() {
-  return AppBar(
-    bottom: PreferredSize(
-      preferredSize: const Size.fromHeight(1.0),
-      child: Container(
-        color: AppColors.primarySecondaryBackground,
-        height: 1.h,
-      ),
-    ),
-    title: Center(
-      child: Text(
-        'Log In',
-        style: TextStyle(
-            color: AppColors.primaryText,
-            fontSize: 16.sp,
-            fontWeight: FontWeight.normal),
-      ),
-    ),
-  );
-}
-
 Widget buildThirdPartyLogin(BuildContext context) {
   return Container(
     margin: EdgeInsets.only(top: 30.h, bottom: 20.h),
@@ -63,11 +42,12 @@ Widget reuseableText(String text) {
   );
 }
 
-Widget buildTextField(String hintText, String textType, String iconName) {
+Widget buildTextField(String hintText, String textType, String iconName,
+    Function(String) onChanged) {
   return Container(
     width: 325.w,
     height: 50.h,
-    margin: EdgeInsets.only(bottom: 20.h),
+    margin: EdgeInsets.only(bottom: 20.h, top: 5.h),
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(15.w),
@@ -85,6 +65,7 @@ Widget buildTextField(String hintText, String textType, String iconName) {
           width: 270.w,
           height: 50.h,
           child: TextField(
+            onChanged: onChanged,
             keyboardType: TextInputType.multiline,
             decoration: InputDecoration(
               hintText: hintText,
@@ -131,9 +112,10 @@ Widget forgotPassword() {
   );
 }
 
-Widget buildLoginAndRegButton(String buttonName, String buttonType) {
+Widget buildLoginAndRegButton(
+    String buttonName, String buttonType, Function()? onPressed) {
   return GestureDetector(
-    onTap: () {},
+    onTap: onPressed,
     child: Container(
       width: 325.w,
       height: 50.h,

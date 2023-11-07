@@ -1,35 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:u_learning/common/widgets/app_bar.dart';
-import 'package:u_learning/pages/sign_in/bloc/bloc.dart';
-import 'package:u_learning/pages/sign_in/bloc/event.dart';
-import 'package:u_learning/pages/sign_in/bloc/state.dart';
-import 'package:u_learning/pages/sign_in/sign_in_controller.dart';
+import 'package:u_learning/common/widgets/index.dart';
+import 'package:u_learning/pages/register/bloc/bloc.dart';
+import 'package:u_learning/pages/register/bloc/event.dart';
+import 'package:u_learning/pages/register/bloc/state.dart';
+import 'package:u_learning/pages/register/register_controller.dart';
 import 'package:u_learning/pages/sign_in/widgets/sign_in_widget.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({super.key});
+class Register extends StatelessWidget {
+  const Register({super.key});
 
-  @override
-  State<SignIn> createState() => _SignInState();
-}
-
-class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignInBloc, SignInState>(
+    return BlocBuilder<RegisterBloc, RegisterState>(
       builder: (context, state) {
         return Container(
           color: Colors.white,
           child: SafeArea(
               child: Scaffold(
-            appBar: buildAppBar("Log In"),
+            appBar: buildAppBar('Sign Up'),
             body: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  buildThirdPartyLogin(context),
                   Center(
                       child:
                           reuseableText("Or use your email account to login")),
@@ -39,29 +33,42 @@ class _SignInState extends State<SignIn> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        reuseableText("Username"),
+                        buildTextField(
+                            "Enter your user name",
+                            'text',
+                            'user',
+                            (value) => context
+                                .read<RegisterBloc>()
+                                .add(UsernameEvent(value))),
                         reuseableText("Email"),
                         buildTextField(
                             "Enter your email address",
                             'email',
                             'user',
                             (value) => context
-                                .read<SignInBloc>()
+                                .read<RegisterBloc>()
                                 .add(EmailEvent(value))),
                         reuseableText("Password"),
                         buildTextField(
-                            "Enter your password",
+                            "Enter your Password",
                             'password',
                             'lock',
                             (value) => context
-                                .read<SignInBloc>()
+                                .read<RegisterBloc>()
                                 .add(PasswordEvent(value))),
-                        forgotPassword(),
-                        buildLoginAndRegButton('Log In', 'login', () {
-                          SignInController(context: context)
-                              .handleSignIn('email');
-                        }),
-                        buildLoginAndRegButton('Sign Up', 'resgister', () {
-                          Navigator.pushNamed(context, '/register');
+                        reuseableText("Confirm Password"),
+                        buildTextField(
+                            "Enter your Confirm Password",
+                            'password',
+                            'lock',
+                            (value) => context
+                                .read<RegisterBloc>()
+                                .add(ConfirmPasswordEvent(value))),
+                        reuseableText(
+                            "By creating an account you agree with our them & condication"),
+                        buildLoginAndRegButton('Sign Up', 'register', () {
+                          RegisterController(context: context).handleRegister();
                         }),
                       ],
                     ),
