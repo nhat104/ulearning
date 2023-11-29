@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:u_learning/common/values/constants.dart';
 import 'package:u_learning/common/widgets/toast.dart';
+import 'package:u_learning/global.dart';
+import 'package:u_learning/pages/application/application_page.dart';
 import 'package:u_learning/pages/sign_in/bloc/bloc.dart';
 
 class SignInController {
@@ -39,13 +42,20 @@ class SignInController {
 
           var user = credential.user;
           if (user != null) {
-            print('user is not null');
+            Global.storageService
+                .setString(AppConstants.STORAGE_USER_TOKEN_KEY, user.uid);
+            if (!context.mounted) return;
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => const ApplicationPage(),
+              ),
+            );
           } else {
             toastInfo(message: 'You are not an user of this app');
             return;
           }
         } on FirebaseAuthException catch (e) {
-          print('error code ${e.code}');
+          debugPrint('error code ${e.code}');
           if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
             toastInfo(message: 'No user found for that email.');
           } else if (e.code == 'too-many-requests') {
@@ -55,6 +65,8 @@ class SignInController {
           }
         }
       }
-    } catch (e) {}
+    } catch (e) {
+      debugPrint('error $e');
+    }
   }
 }

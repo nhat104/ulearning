@@ -1,22 +1,13 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:u_learning/common/values/colors.dart';
-import 'package:u_learning/pages/bloc_provider.dart';
-import 'package:u_learning/pages/register/register.dart';
-import 'package:u_learning/pages/sign_in/sign_in.dart';
-import 'package:u_learning/pages/welcome/welcome.dart';
+import 'package:u_learning/global.dart';
 
-import 'firebase_options.dart';
+import 'common/routes/routes.dart';
+import 'common/values/colors.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
+  await Global.init();
   runApp(const MyApp());
 }
 
@@ -27,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: AppBlocProvider.allBlocProviders,
+      providers: [...AppPages.allProviders(context)],
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -40,11 +31,7 @@ class MyApp extends StatelessWidget {
               backgroundColor: Colors.white,
             ),
           ),
-          home: const Welcome(),
-          routes: {
-            '/signIn': (context) => const SignIn(),
-            '/register': (context) => const Register(),
-          },
+          onGenerateRoute: AppPages.generateRouteSettings,
         ),
       ),
     );
