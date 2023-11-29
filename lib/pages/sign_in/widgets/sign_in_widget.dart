@@ -4,8 +4,8 @@ import 'package:u_learning/common/values/colors.dart';
 
 Widget buildThirdPartyLogin(BuildContext context) {
   return Container(
-    margin: EdgeInsets.only(top: 30.h, bottom: 20.h),
-    padding: EdgeInsets.only(left: 25.h, right: 25.h),
+    margin: EdgeInsets.only(top: 40.h, bottom: 20.h),
+    padding: EdgeInsets.only(left: 50.h, right: 50.h),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [

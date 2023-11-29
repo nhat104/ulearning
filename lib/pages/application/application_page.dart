@@ -5,7 +5,7 @@ import 'package:u_learning/common/values/colors.dart';
 import 'package:u_learning/pages/application/bloc/bloc.dart';
 import 'package:u_learning/pages/application/bloc/event.dart';
 import 'package:u_learning/pages/application/bloc/state.dart';
-import 'package:u_learning/pages/application/widgets.dart';
+import 'package:u_learning/pages/application/widgets/widgets.dart';
 
 class ApplicationPage extends StatefulWidget {
   const ApplicationPage({super.key});

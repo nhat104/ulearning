@@ -67,7 +67,7 @@ class Register extends StatelessWidget {
                                 .add(ConfirmPasswordEvent(value))),
                         reuseableText(
                             "By creating an account you agree with our them & condication"),
-                        buildLoginAndRegButton('Sign Up', 'register', () {
+                        buildLoginAndRegButton('Sign Up', 'login', () {
                           RegisterController(context: context).handleRegister();
                         }),
                       ],
