@@ -23,15 +23,36 @@ class _HomePageState extends State<HomePage> {
         builder: (context, state) {
           return Container(
             margin: EdgeInsets.symmetric(horizontal: 25.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                homePageText('Hello', color: AppColors.primaryThreeElementText),
-                homePageText('NhatMM', top: 5),
-                20.verticalSpace,
-                searchView(),
-                sliderView(context, state),
-                menuView(),
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                    child: homePageText(
+                  'Hello',
+                  color: AppColors.primaryThreeElementText,
+                )),
+                SliverToBoxAdapter(child: homePageText('NhatMM', top: 5)),
+                SliverPadding(padding: EdgeInsets.only(top: 20.h)),
+                SliverToBoxAdapter(child: searchView()),
+                SliverToBoxAdapter(child: sliderView(context, state)),
+                SliverToBoxAdapter(child: menuView()),
+                SliverPadding(
+                  padding: EdgeInsets.symmetric(vertical: 18.h),
+                  sliver: SliverGrid(
+                      delegate: SliverChildBuilderDelegate(
+                        childCount: 4,
+                        (context, index) => GestureDetector(
+                          onTap: () {},
+                          child: courseGrid(),
+                        ),
+                      ),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 1.6,
+                        mainAxisSpacing: 15,
+                        crossAxisSpacing: 15,
+                      )),
+                ),
               ],
             ),
           );

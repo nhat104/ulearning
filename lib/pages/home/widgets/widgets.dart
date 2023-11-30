@@ -146,6 +146,7 @@ Widget sliderView(BuildContext context, HomeState state) {
         ),
       ),
       Container(
+        margin: EdgeInsets.only(top: 10.h),
         child: DotsIndicator(
           dotsCount: 3,
           position: state.index,
@@ -201,8 +202,16 @@ Widget menuView() {
         child: Row(
           children: [
             _reusableMenuText('All'),
-            _reusableMenuText('Popular'),
-            _reusableMenuText('Newest'),
+            _reusableMenuText(
+              'Popular',
+              textColor: AppColors.primaryThreeElementText,
+              bgColor: Colors.white,
+            ),
+            _reusableMenuText(
+              'Newest',
+              textColor: AppColors.primaryThreeElementText,
+              bgColor: Colors.white,
+            ),
           ],
         ),
       ),
@@ -224,22 +233,62 @@ Widget _reusableSubtitleText(String text,
   );
 }
 
-Widget _reusableMenuText(String text) {
+Widget _reusableMenuText(String text,
+    {Color textColor = AppColors.primaryElementText,
+    Color bgColor = AppColors.primaryElement}) {
   return Container(
     margin: EdgeInsets.only(right: 20.w),
     padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
     decoration: BoxDecoration(
-      color: AppColors.primaryElement,
+      color: bgColor,
       borderRadius: BorderRadius.circular(7.w),
-      border: Border.all(
-        color: AppColors.primaryElement,
-      ),
+      border: Border.all(color: bgColor),
     ),
     child: _reusableSubtitleText(
       text,
-      color: AppColors.primaryElementText,
+      color: textColor,
       fontSize: 11,
       fontWeight: FontWeight.normal,
+    ),
+  );
+}
+
+Widget courseGrid() {
+  return Container(
+    padding: EdgeInsets.all(12.w),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(15.w),
+      image: const DecorationImage(
+        image: AssetImage('assets/icons/Image(1).png'),
+        fit: BoxFit.cover,
+      ),
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'English',
+          maxLines: 1,
+          overflow: TextOverflow.fade,
+          style: TextStyle(
+            color: AppColors.primaryElementText,
+            fontSize: 11.sp,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 5.h),
+        Text(
+          'Flutter',
+          maxLines: 1,
+          overflow: TextOverflow.fade,
+          style: TextStyle(
+            color: AppColors.primaryFourElementText,
+            fontSize: 8.sp,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+      ],
     ),
   );
 }
