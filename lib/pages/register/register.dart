@@ -26,14 +26,14 @@ class Register extends StatelessWidget {
                 children: [
                   Center(
                       child:
-                          reuseableText("Or use your email account to login")),
+                          reusableText("Or use your email account to login")),
                   Container(
                     margin: EdgeInsets.only(top: 40.h),
                     padding: EdgeInsets.only(left: 25.w, right: 25.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        reuseableText("Username"),
+                        reusableText("Username"),
                         buildTextField(
                             "Enter your user name",
                             'text',
@@ -41,7 +41,7 @@ class Register extends StatelessWidget {
                             (value) => context
                                 .read<RegisterBloc>()
                                 .add(UsernameEvent(value))),
-                        reuseableText("Email"),
+                        reusableText("Email"),
                         buildTextField(
                             "Enter your email address",
                             'email',
@@ -49,7 +49,7 @@ class Register extends StatelessWidget {
                             (value) => context
                                 .read<RegisterBloc>()
                                 .add(EmailEvent(value))),
-                        reuseableText("Password"),
+                        reusableText("Password"),
                         buildTextField(
                             "Enter your Password",
                             'password',
@@ -57,7 +57,7 @@ class Register extends StatelessWidget {
                             (value) => context
                                 .read<RegisterBloc>()
                                 .add(PasswordEvent(value))),
-                        reuseableText("Confirm Password"),
+                        reusableText("Confirm Password"),
                         buildTextField(
                             "Enter your Confirm Password",
                             'password',
@@ -65,7 +65,7 @@ class Register extends StatelessWidget {
                             (value) => context
                                 .read<RegisterBloc>()
                                 .add(ConfirmPasswordEvent(value))),
-                        reuseableText(
+                        reusableText(
                             "By creating an account you agree with our them & condication"),
                         buildLoginAndRegButton('Sign Up', 'login', () {
                           RegisterController(context: context).handleRegister();

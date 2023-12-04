@@ -28,7 +28,7 @@ Widget _reuseableIcons(String iconName) {
   );
 }
 
-Widget reuseableText(String text) {
+Widget reusableText(String text) {
   return Container(
     margin: EdgeInsets.only(bottom: 5.h),
     child: Text(

@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:u_learning/common/api/user.dart';
+import 'package:u_learning/common/entities/entities.dart';
 import 'package:u_learning/common/values/constants.dart';
 import 'package:u_learning/common/widgets/toast.dart';
 import 'package:u_learning/global.dart';
@@ -42,8 +45,20 @@ class SignInController {
 
           var user = credential.user;
           if (user != null) {
+            // LoginRequestEntity loginRequestEntity = LoginRequestEntity(
+            //   type: 1,
+            //   // name: user.displayName,
+            //   // email: user.email,
+            //   // phone: user.phoneNumber,
+            //   // avatar: user.photoURL,
+            //   // openId: user.uid,
+            // );
+            // loginRequest(loginRequestEntity);
+
             Global.storageService
                 .setString(AppConstants.STORAGE_USER_TOKEN_KEY, user.uid);
+            Global.storageService.setString(
+                AppConstants.STORAGE_USER_PROFILE_KEY, user.toString());
             if (!context.mounted) return;
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
@@ -68,5 +83,15 @@ class SignInController {
     } catch (e) {
       debugPrint('error $e');
     }
+  }
+
+  void loginRequest(LoginRequestEntity loginRequestEntity) async {
+    EasyLoading.show(
+      indicator: const CircularProgressIndicator(),
+      maskType: EasyLoadingMaskType.clear,
+      dismissOnTap: true,
+    );
+
+    await UserAPI.login(params: loginRequestEntity);
   }
 }

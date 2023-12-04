@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:u_learning/common/entities/entities.dart';
 import 'package:u_learning/common/values/constants.dart';
 
 class StorageService {
@@ -25,5 +28,21 @@ class StorageService {
     return _prefs.getString(AppConstants.STORAGE_USER_TOKEN_KEY) == null
         ? false
         : true;
+  }
+
+  String getUserToken() {
+    return _prefs.getString(AppConstants.STORAGE_USER_TOKEN_KEY) ?? '';
+  }
+
+  UserItem getUserProfile() {
+    var profile = _prefs.getString(AppConstants.STORAGE_USER_PROFILE_KEY) ?? '';
+    if (profile.isNotEmpty) {
+      return UserItem.fromJson(jsonDecode(profile));
+    }
+    return UserItem();
+  }
+
+  Future<bool> remove(String key) async {
+    return await _prefs.remove(key);
   }
 }

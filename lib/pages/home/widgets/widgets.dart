@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:u_learning/common/values/colors.dart';
+import 'package:u_learning/common/widgets/base_text_widget.dart';
 import 'package:u_learning/pages/home/bloc/bloc.dart';
 import 'package:u_learning/pages/home/bloc/event.dart';
 import 'package:u_learning/pages/home/bloc/state.dart';
@@ -189,9 +190,9 @@ Widget menuView() {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            _reusableSubtitleText('Choose your course'),
+            reusableText('Choose your course'),
             GestureDetector(
-              child: _reusableSubtitleText('See all',
+              child: reusableText('See all',
                   color: AppColors.primaryThreeElementText, fontSize: 10),
             ),
           ],
@@ -219,20 +220,6 @@ Widget menuView() {
   );
 }
 
-Widget _reusableSubtitleText(String text,
-    {Color color = AppColors.primaryText,
-    int fontSize = 16,
-    FontWeight fontWeight = FontWeight.bold}) {
-  return Text(
-    text,
-    style: TextStyle(
-      color: color,
-      fontSize: fontSize.sp,
-      fontWeight: fontWeight,
-    ),
-  );
-}
-
 Widget _reusableMenuText(String text,
     {Color textColor = AppColors.primaryElementText,
     Color bgColor = AppColors.primaryElement}) {
@@ -244,7 +231,7 @@ Widget _reusableMenuText(String text,
       borderRadius: BorderRadius.circular(7.w),
       border: Border.all(color: bgColor),
     ),
-    child: _reusableSubtitleText(
+    child: reusableText(
       text,
       color: textColor,
       fontSize: 11,

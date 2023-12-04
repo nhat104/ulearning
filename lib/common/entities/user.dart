@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginRequestEntity {
@@ -8,7 +7,7 @@ class LoginRequestEntity {
   String? email;
   String? phone;
   String? avatar;
-  String? open_id;
+  String? openId;
   int? online;
 
   LoginRequestEntity({
@@ -18,21 +17,22 @@ class LoginRequestEntity {
     this.email,
     this.phone,
     this.avatar,
-    this.open_id,
+    this.openId,
     this.online,
   });
 
   Map<String, dynamic> toJson() => {
-    "type": type,
-    "name": name,
-    "description": description,
-    "email": email,
-    "phone": phone,
-    "avatar": avatar,
-    "open_id": open_id,
-    "online": online,
-  };
+        "type": type,
+        "name": name,
+        "description": description,
+        "email": email,
+        "phone": phone,
+        "avatar": avatar,
+        "open_id": openId,
+        "online": online,
+      };
 }
+
 //api post response msg
 class UserLoginResponseEntity {
   int? code;
@@ -53,10 +53,9 @@ class UserLoginResponseEntity {
       );
 }
 
-
 // login result
 class UserItem {
-  String? access_token;
+  String? accessToken;
   String? token;
   String? name;
   String? description;
@@ -65,7 +64,7 @@ class UserItem {
   int? type;
 
   UserItem({
-    this.access_token,
+    this.accessToken,
     this.token,
     this.name,
     this.description,
@@ -74,9 +73,8 @@ class UserItem {
     this.type,
   });
 
-  factory UserItem.fromJson(Map<String, dynamic> json) =>
-      UserItem(
-        access_token: json["access_token"],
+  factory UserItem.fromJson(Map<String, dynamic> json) => UserItem(
+        accessToken: json["access_token"],
         token: json["token"],
         name: json["name"],
         description: json["description"],
@@ -86,14 +84,14 @@ class UserItem {
       );
 
   Map<String, dynamic> toJson() => {
-    "access_token": access_token,
-    "token": token,
-    "name": name,
-    "description": description,
-    "avatar": avatar,
-    "online": online,
-    "type": type,
-  };
+        "access_token": accessToken,
+        "token": token,
+        "name": name,
+        "description": description,
+        "avatar": avatar,
+        "online": online,
+        "type": type,
+      };
 }
 
 class UserData {
@@ -112,9 +110,9 @@ class UserData {
   });
 
   factory UserData.fromFirestore(
-      DocumentSnapshot<Map<String, dynamic>> snapshot,
-      SnapshotOptions? options,
-      ) {
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
     final data = snapshot.data();
     return UserData(
       token: data?['token'],
@@ -135,5 +133,3 @@ class UserData {
     };
   }
 }
-
-

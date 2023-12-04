@@ -13,4 +13,10 @@ class AppRoutes {
 
   // home page
   static const home = '/home';
+
+  // setting page
+  static const setting = '/setting';
+
+  // course detail page
+  static const courseDetail = '/course_detail';
 }
